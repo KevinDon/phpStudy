@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
+	邓数形的信息
+</title><meta http-equiv="pragma" content="no-cache" /><meta http-equiv="Cache-Control" content="no-store, must-revalidate" /><meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT" /><meta http-equiv="expires" content="0" /><link type="text/css" rel="stylesheet" href="http://img.papayue.com/sucai/index.css" />
+    <script src="http://img.papayue.com/Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+    
+<title>会员详细</title>
+    <script src="http://img.papayue.com/Scripts/jquery.lightbox-0.5.js" type="text/javascript"></script>
+    <link href="http://img.papayue.com/Styles/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
+    <link href="http://img.papayue.com/Styles/UserinfoStyle.css" rel="stylesheet" type="text/css" />
+<script>
+    $(function () {
+        $('#gallery a').lightBox();
+        getsize();
+        $("[i=close]").click(function () {
+            $("[s=s]").hide();
+        });
+        $("[i=close2]").click(function () {
+            $("[lw=lw]").hide();
+        });
+    });
+    function gz() {
+        $.post("ajax/Attention.aspx", { "UserID": $("#MainContent_HidUserID").val() }, function (data) { 
+            if(data=="2")
+                alert("已经关注过");
+            else  if(data=="1")
+                alert("关注成功");
+            else if (data == "3")
+                alert("请注册登录在关注");
+            else if (data == "4")
+                alert("不能关注自己");
+            else  
+                alert("关注失败");
+        })
+    }
+    function sx() {
+        $("[s=s]").show();
+    }
+    function lwx() {
+        $("[lw=lw]").show();
+    }
+    function msg() {
+        $.post("ajax/Msg.aspx", { "UserID": $("#MainContent_HidUserID").val(), "Content": $("#Content").val() }, function (data) {
+            if (data == "1")
+                alert("发送成功");
+            else if (data == "3")
+                alert("请注册登录在发消息");
+            else if (data == "4")
+                alert("不能给自己发消息");
+            else
+                alert("消息发送失败");
+            $("[s=s]").hide();
+        })
+    }
+
+function lw() {
+    $.post("ajax/lw.aspx", { "UserID": $("#MainContent_HidUserID").val(), "lwid": $("#HidLw").val() }, function (data) {
+            if (data == "1")
+                alert("赠送礼物成功");
+            else if (data == "3")
+                alert("请注册登录在赠送礼物");
+            else if (data == "4")
+                alert("不能给自己赠送礼物");
+            else if (data == "5")
+                alert("金币不足，多多推广赚金币吧");
+            else
+                alert("赠送礼物失败");
+            $("[lw=lw]").hide();
+        })
+    }
+    function getWindowSize() {
+        var client = {
+            x: 0,
+            y: 0
+        };
+
+        if (typeof document.compatMode != 'undefined' && document.compatMode == 'CSS1Compat') {
+            client.x = document.documentElement.clientWidth;
+            client.y = document.documentElement.clientHeight;
+        } else if (typeof document.body != 'undefined' && (document.body.scrollLeft || document.body.scrollTop)) {
+            client.x = document.body.clientWidth;
+            client.y = document.body.clientHeight;
+        }
+
+        return client;
+    }
+
+    function getsize() {
+        var size = getWindowSize();
+        $("[s=s]").css("left", size.x / 2 - 160);
+        $("[s=s]").css("top", size.y / 2 - 200);
+        $("[lw=lw]").css("left", size.x / 2 - 160);
+        $("[lw=lw]").css("top", size.y / 2 - 200);
+    }
+    function ck() {
+        $.post("ajax/LookUser.aspx", { "UserID": $("#MainContent_HidUserID").val() }, function (data) {
+            if (data == "5")
+                alert("金币不足5个，多多推广赚金币吧");
+            else if (data == "3")
+                alert("请注册登录在查看");
+            else if (data == "6")
+                alert("您的VIP已经到期，请续费");
+            else if (data == "4")
+                alert("请不要查看自己，浪费金币");
+            else {
+                var mode = $.parseJSON(data);
+                $("#qq").html(mode.QQ);
+                $("#dh").html(mode.Phone);
+                $("#wx").html(mode.WeiXin);
+            }
+        })
+    }
+</script>
+</head>
+<body>
+    <form method="post" action="UserInfo.aspx?id=291" id="ctl01">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMjAyOTQ5NDMxOA9kFgJmD2QWAgIDD2QWBmYPFgIeBXN0eWxlBQlkaXNwbGF5OjtkAgEPFgIfAAUNZGlzcGxheTpub25lO2QCAg9kFgICAQ8WAh4LXyFJdGVtQ291bnQCBBYIZg9kFgJmDxUFAjMxJi9Vc2VySW1hZ2UvMzEvMjAxNV8wOV8yOV8xMF8zOV8yOTEuanBnAjMxGuW5v+W3nuW4giAgICAgICAgICAgICAgICAgCeWykeaVsOW5tmQCAQ9kFgJmDxUFAjM0Ji9Vc2VySW1hZ2UvMzQvMjAxNV8wOV8yOV8xM18xMl80NDEuanBnAjM0GuWMl+S6rOW4giAgICAgICAgICAgICAgICAgCeS9lee7k+WummQCAg9kFgJmDxUFAjMyJi9Vc2VySW1hZ2UvMzIvMjAxNV8wOV8yOV8xMF8zOV81ODEuanBnAjMyGuS4iua1t+W4giAgICAgICAgICAgICAgICAgCemDkeS4jeWkp2QCAw9kFgJmDxUFAzg4MycvVXNlckltYWdlLzg4My8yMDE1XzExXzAzXzE0XzE1XzM5MS5qcGcDODgzCeS4iua1t+W4ggnlrZTnroDop4RkZDibWJMOxvbth5oIAH2k4foB8+mo802LUEVDcamlzFmW" />
+
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAJOIQLb2I8Rpe6/EQKfo3UV30eLFHUBUvbzUOhGGrLPcIRw4cM3oZvpwIvkV47/fjT/wnfJ3+qz5Farp1bP0xZT" />
+        <div class="nav_top">
+	        <div class="navcon">
+		        <div class="logo">
+			        <a href="" title=""></a>
+		        </div>
+		        <ul class="menu">
+			        <li><a href="/Index.aspx"  title="">首页</a></li>
+			        <li><a href="http://www.papayue.com/SelList.aspx?sex=%E5%A5%B3&StartAge=18&EndAge=36&cityid=&IsImg=false&isVip=false"    target="_blank">找美女</a></li>
+			        <li><a href="http://www.papayue.com/SelList.aspx?sex=%E7%94%B7&StartAge=18&EndAge=36&cityid=&IsImg=true"    target="_blank">找帅哥</a></li>
+                    
+                    <li><a href="/Funny.aspx" target="_blank">搞笑天地</a></li>
+                    <li><a href="/Raffle/Raffle.aspx"   target="_blank">幸运转盘</a></li>
+			        <li><a href="/JiQiao.aspx"   target="_blank">防骗技巧</a></li>
+		        </ul>
+                <dl id="div1" class="search" style="display:;">
+			        <dd>
+                    <a href="/register.aspx" class="reg" target="_blank">注册</a><a href="/Login.aspx" class="reg" target="_blank">登陆</a>			</dd>
+		        </dl>
+		        <dl id="div2" class="search" style="display:none;">
+			        <dd>
+                    <a href="/UserManger/Main.aspx" class="reg" target="_blank">我的个人中心</a>			</dd>
+		        </dl>
+	        </div>
+        </div>
+            
+
+
+<div class="s_top"><a href="register.aspx" target="_blank"><img src="/sucai/join.png" border="0"></a></div>
+
+<div class="wrapper_u">
+
+<div class="wrapper_u_left">
+<div class="wrapper_mid_1">
+<div class="wrapper_mid_tit" style="font-size:15px;font-weight:bold;">Ta的基本信息</div>
+<div class="mid_1_1">
+<a href="/UserImage/291/2015_10_30_15_32_071.jpg" target="_blank">
+<img src="http://img.papayue.com/UserImage/291/2015_10_30_15_32_071.jpg" border="0"  height="250px" style="padding:10px 20px 20px 30px;" class="img">
+</a>
+</div>
+
+<div class="mid_1_2">
+<input name="ctl00$MainContent$HidUserID" type="hidden" id="MainContent_HidUserID" value="291" />
+<table width="550px">
+<tbody><tr>
+<th width="100" height="35px" align="right">昵称：&nbsp;&nbsp;</th>
+<td width="180">邓数形</td><th width="92" align="right">性别：&nbsp;&nbsp;</th>
+<td width="158">女</td>
+</tr>
+<tr>
+<th height="35px" align="right">年龄：&nbsp;&nbsp;</th><td>26岁</td>
+<th align="right">身高：&nbsp;&nbsp;</th>
+<td>163CM</td>
+</tr>
+<tr><th height="35px" align="right">职业：&nbsp;&nbsp;</th>
+<td>高级干部</td>
+<th align="right">年薪：&nbsp;&nbsp;</th>
+<td>5万左右</td>
+</tr>
+<tr><th height="35px" align="right">学历：&nbsp;&nbsp;</th>
+<td>大专</td><th align="right">婚姻状况：&nbsp;&nbsp;</th><td>已婚</td></tr>
+<tr><th height="35px" align="right">所在地：&nbsp;&nbsp;</th><td>北京市</td>
+<th align="right">交友目的：&nbsp;&nbsp;</th><td>亲密交友</td></tr>
+<tr><th height="35px" align="right">人气值：&nbsp;&nbsp;</th>
+<td>42266人访问</td><th height="35px" align="right">微信号：&nbsp;&nbsp;</th>
+<td><a id="wx" onclick="ck();" style="color:#F81968;cursor:pointer;">[查看]</a></td>
+</tr>
+<tr><th height="35px" align="right">联系电话：&nbsp;&nbsp;</th>
+<td><a id="dh"  onclick="ck();" style="color:#F81968;cursor:pointer;">[查看]</a></td>
+<th align="right">联系QQ：&nbsp;&nbsp;</th>
+<td><a  id="qq"  onclick="ck();" style="color:#F81968;cursor:pointer;">[查看]</a></td></tr>
+<tr>
+<td colspan="4" height="50px" align="cetner">
+<div align="center">
+<a onclick="gz();" style="cursor:pointer;"><img src="/sucai/btn_2.gif" border="0" class="img" style="opacity:1; -webkit-filter: opacity(100%);"></a>&nbsp;
+<a onclick="sx();" style="cursor:pointer;"><img src="/sucai/btn_1.gif" border="0" class="img" style="opacity: 1; -webkit-filter: opacity(100%);"></a>&nbsp;
+<a onclick="lwx();" style="cursor:pointer; "><img src="/sucai/btn_3.gif" border="0" class="img" style="opacity: 1; -webkit-filter: opacity(100%);"></a>&nbsp;
+</div>
+</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<div class="wrapper_mid_2">
+<div class="wrapper_mid_tit" style="font-size:15px;font-weight:bold;">Ta的照片</div>
+<div id="gallery" class="layer-photos-demo">
+<ul>
+<li><a href='/UserImage/291/2015_10_30_15_32_060.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_060.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_071.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_071.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_072.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_072.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_083.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_083.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_094.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_094.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_095.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_095.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_106.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_106.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_117.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_117.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_118.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_118.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_129.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_129.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_1310.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_1310.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_1311.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_1311.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_1412.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_1412.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_1413.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_1413.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_1614.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_1614.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_1615.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_1615.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_1716.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_1716.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_1817.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_1817.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_1918.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_1918.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_2019.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_2019.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_2120.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_2120.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_2221.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_2221.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_2422.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_2422.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_2523.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_2523.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_2524.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_2524.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_2625.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_2625.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_2826.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_2826.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_2927.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_2927.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_3128.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_3128.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_3229.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_3229.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_3330.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_3330.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_3531.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_3531.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_3632.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_3632.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_3833.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_3833.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li><li><a href='/UserImage/291/2015_10_30_15_32_3934.jpg' ><img src='http://img.papayue.com/UserImage/291/2015_10_30_15_32_3934.jpg' alt='点击查看大图' style='width: 113px; max-height:150px; margin-top: 10px; margin-left: 10px; cursor: pointer; opacity: 1; -webkit-filter: opacity(100%);' class='img'></a></li>
+</ul></div>
+</div>
+
+
+
+
+
+<div class="wrapper_mid_4">
+<div class="wrapper_mid_tit" style="font-size:15px;font-weight:bold;">其它信息</div>
+<div class="wrap_mid_tab" align="center">
+<table width="750px">
+<tbody><tr>
+<td width="100" height="35px" align="left">自我介绍：&nbsp;&nbsp;我是一位来自北京市的美女，希望在约炮网，找到我心仪的男神</td>
+</tr>
+
+<tr>
+<td width="100" height="35px" align="left">兴趣爱好：&nbsp;&nbsp;娱乐</td>
+</tr>
+<tr>
+<td width="100" height="35px" align="left">我的个性：&nbsp;&nbsp;自信</td>
+</tr>
+<tr style=" display:none ">
+<td width="100" height="35px" align="left">我能提供：&nbsp;&nbsp;情感帮助</td>
+</tr>
+<tr style=" display:none ">
+<td width="100" height="35px" align="left">交友宣言：&nbsp;&nbsp;很久没有过性生活了，诚心在这里找一个性伴侣！</td>
+</tr>
+<tr style=" display:none ">
+<td width="100" height="35px" align="left">交友目的：&nbsp;&nbsp;亲密交友</td>
+</tr>
+<tr style=" display:none ">
+<td width="100" height="35px" align="left">期望炮友：&nbsp;&nbsp;我希望在啪啪约，遇到一位帅气的男神</td>
+</tr>
+<tr style=" display:none ">
+<td width="100" height="35px" align="left">性爱观念：&nbsp;&nbsp;无性经验</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+
+
+<div class="wrapper_mid_5">
+<div class="wrapper_mid_tit" style="font-size:15px;font-weight:bold;">Ta收到的礼物</div>
+<div class="wrap_mid_tab">
+<ul>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td height="140px" align="center"><img src="/sucai/gift3.gif" border="0" width="70px" height="70px"></td></tr><tr><td height="20px" align="center">&nbsp;香吻</td></tr>
+</tbody></table></li>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td height="140px" align="center"><img src="/sucai/gift3.gif" border="0" width="70px" height="70px"></td></tr><tr><td height="20px" align="center">&nbsp;香吻</td></tr>
+</tbody></table></li>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td height="140px" align="center"><img src="/sucai/gift8.png" border="0" width="70px" height="70px"></td></tr><tr><td height="20px" align="center">&nbsp;嫁给我</td></tr>
+</tbody></table></li>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td height="140px" align="center"><img src="/sucai/gift7.png" border="0" width="70px" height="70px"></td></tr><tr><td height="20px" align="center">&nbsp;超级跑车</td></tr>
+</tbody></table></li>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td height="140px" align="center"><img src="/sucai/gift6.gif" border="0" width="70px" height="70px"></td></tr><tr><td height="20px" align="center">&nbsp;蓝宝石</td></tr>
+</tbody></table></li>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td height="140px" align="center"><img src="/sucai/gift4.gif" border="0" width="70px" height="70px"></td></tr><tr><td height="20px" align="center">&nbsp;香水</td></tr>
+</tbody></table></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div class="wrapper_u_right">
+
+<div class="wrapper_r_1">
+<div class="wrapper_r_tit">VIP会员推荐</div>
+<div class="wrapper_r_cont">
+<ul>
+
+    
+        <li>
+        <table border="0" cellspacing="0" cellpadding="0" width="135px">
+          <tbody><tr>
+            <td height="170px" align="center">
+            <a href="UserInfo.aspx?id=31"><img src="/UserImage/31/2015_09_29_10_39_291.jpg" border="0" width="135px" height="170px" class="img"></a></td>
+          </tr>
+          <tr>
+            <td height="40px" align="center"><a href="UserInfo.aspx?id=31">广州市                  - 岑数并</a></td>
+          </tr>
+        </tbody></table>
+        </li>
+    
+        <li>
+        <table border="0" cellspacing="0" cellpadding="0" width="135px">
+          <tbody><tr>
+            <td height="170px" align="center">
+            <a href="UserInfo.aspx?id=34"><img src="/UserImage/34/2015_09_29_13_12_441.jpg" border="0" width="135px" height="170px" class="img"></a></td>
+          </tr>
+          <tr>
+            <td height="40px" align="center"><a href="UserInfo.aspx?id=34">北京市                  - 何结定</a></td>
+          </tr>
+        </tbody></table>
+        </li>
+    
+        <li>
+        <table border="0" cellspacing="0" cellpadding="0" width="135px">
+          <tbody><tr>
+            <td height="170px" align="center">
+            <a href="UserInfo.aspx?id=32"><img src="/UserImage/32/2015_09_29_10_39_581.jpg" border="0" width="135px" height="170px" class="img"></a></td>
+          </tr>
+          <tr>
+            <td height="40px" align="center"><a href="UserInfo.aspx?id=32">上海市                  - 郑不大</a></td>
+          </tr>
+        </tbody></table>
+        </li>
+    
+        <li>
+        <table border="0" cellspacing="0" cellpadding="0" width="135px">
+          <tbody><tr>
+            <td height="170px" align="center">
+            <a href="UserInfo.aspx?id=883"><img src="/UserImage/883/2015_11_03_14_15_391.jpg" border="0" width="135px" height="170px" class="img"></a></td>
+          </tr>
+          <tr>
+            <td height="40px" align="center"><a href="UserInfo.aspx?id=883">上海市 - 孔简规</a></td>
+          </tr>
+        </tbody></table>
+        </li>
+    
+</ul>
+</div>
+</div>
+
+
+<div class="wrapper_r_2">
+
+<iframe src="/sucai/dt.html" width="308" height="400" marginheight="0" marginwidth="0" frameborder="0" scrolling="no"></iframe>
+
+</div>
+
+
+<!--
+<div class="wrapper_r_3">
+<div class="wrapper_r_tit">推荐会员</div>
+<div class="wrapper_r_cont">
+<ul>
+<li><img src="http://99xiehou.bixedu.com/Uploads/201410/545257f59bade.jpg" border="0" width="130px" height="170px" class="img">
+<span style="height:30px;line-height:30px;">111</span></li>
+<li><img src="http://99xiehou.bixedu.com/Uploads/201410/545257f59bade.jpg" border="0" width="130px" height="170px" class="img"><span style="height:30px;line-height:30px;">111</span></li>
+<li style="margin-top:15px;"><img src="http://99xiehou.bixedu.com/Uploads/201410/545257f59bade.jpg" border="0" width="130px" height="170px" class="img"><span style="height:30px;line-height:30px;">111</span></li>
+<li style="margin-top:15px;"><img src="http://99xiehou.bixedu.com/Uploads/201410/545257f59bade.jpg" border="0" width="130px" height="170px" class="img"><span style="height:30px;line-height:30px;">111</span></li>
+</ul>
+</div>
+
+</div>
+
+-->
+
+<link href="Styles/ui-dialog.css" rel="stylesheet" type="text/css" />
+<div  s=s class="ui-popup ui-popup-show ui-popup-focus" role="dialog" style="position: absolute; outline: 0px; left: 813px; top: 241px; z-index: 1024; display:none">
+<div i="dialog" class="ui-dialog"><div class="ui-dialog-arrow-a"></div>
+<div class="ui-dialog-arrow-b"></div><table class="ui-dialog-grid"><tbody>
+<tr><td i="header" class="ui-dialog-header">
+<button i="close" type="button" class="ui-dialog-close" title="cancel">×</button>
+<div i="title" class="ui-dialog-title" id="jizhi_dialog">发送消息</div></td></tr>
+<tr><td i="body" class="ui-dialog-body"><div i="content" class="ui-dialog-content" id="content:jizhi_dialog">
+<form  id="saveworker">
+	<input type="hidden" name="id" value="0">
+	<div>
+		<div class="formui">
+				<table>
+					<tbody>
+                    <tr><td>
+                    <textarea class="w100px" id="Content" style=" width:230px; height:120px; "></textarea>
+                     
+                    </td></tr>
+					
+
+				</tbody></table>
+		</div>
+	</div>
+</form>
+<div class="addmargin btnset">
+	<input type="button" onclick="msg()" value="确定" />
+</div></div></td></tr></tbody></table></div></div>
+</div>
+
+
+
+<style>
+.formui ul li{ float:left; margin:5px 5px 0 0; cursor:pointer; border:#fff 1px solid }
+</style>
+<script>
+    $(function () {
+        $(".formui ul li").click(function () {
+            $(".formui ul li").css("border", "#fff 1px solid ");
+            $(this).css("border", "#808080 1px solid ");
+            $("#HidLw").val($(this).attr("v"));
+        });
+    })
+</script>
+<input type="hidden" id="HidLw" />
+<div  lw=lw class="ui-popup ui-popup-show ui-popup-focus" role="dialog" style="position: absolute; outline: 0px; left: 813px; top: 241px; z-index: 1024; display:none">
+<div i="dialog" class="ui-dialog"><div class="ui-dialog-arrow-a"></div>
+<div class="ui-dialog-arrow-b"></div><table class="ui-dialog-grid"><tbody>
+<tr><td i="header" class="ui-dialog-header">
+<button i="close2" type="button" class="ui-dialog-close" title="cancel">×</button>
+<div i="title" class="ui-dialog-title" id="Div1">送礼物</div></td></tr>
+<tr><td i="body" ><div i="content" class="ui-dialog-content" id="Div2" >
+<form  id="Form1">
+	<input type="hidden" name="id" value="0">
+	<div>
+		<div class="formui" style=" width:310px; height:170px; ">
+				<ul>
+                <li v=1><img title="5金币"    alt="5金币"   src="/sucai/gift1.gif" /></li>
+                <li v=2><img title="10金币"   alt="10金币"  src="/sucai/gift2.gif" /></li>
+                <li v=3><img title="15金币"   alt="15金币"  src="/sucai/gift3.gif" /></li>
+                <li v=4><img title="100金币"  alt="100金币" src="/sucai/gift4.gif" /></li>
+                <li v=5><img title="25金币"   alt="25金币"  src="/sucai/gift5.gif" /></li>
+                <li v=6><img title="30金币"   alt="30金币"  src="/sucai/gift6.gif" /></li>
+                <li v=7><img title="500金币"  alt="500金币" src="/sucai/gift7.png" /></li>
+                <li v=8><img title="1000金币" alt="1000金币" src="/sucai/gift8.png" /></li>
+                </ul>
+		</div>
+	</div>
+</form>
+<div class="addmargin btnset" style=" text-align:center; height:35px; ">
+	<input type="button" onclick="lw()" value="赠送" />
+</div></div></td></tr></tbody></table></div></div>
+
+</div>
+
+
+
+    <div class="md_footer">
+	    <div class="footer_links">
+		    <a href="" target="_blank">意见反馈</a>
+		    <a href="" target="_blank">广告合作</a>
+		    <a href="/JiQiao.aspx" target="_blank">防骗技巧</a>
+	    </div>
+	    <div class="footer_address" style=" display:none ">
+		    <p>
+		    </p>
+		    <p>
+			    
+		    </p>
+		   
+	    </div>
+	    <div class="footer_copy">
+		    Copyright ©  All rights reserved.啪&nbsp;啪&nbsp;约 版权所有
+            粤ICP备<a href="http://www.miitbeian.gov.cn/">15099780</a>号
+            <script type="text/javascript">                var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_4414168'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/stat.php%3Fid%3D4414168%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+	    </div>
+    </div>
+    </form>
+</body>
+</html>
