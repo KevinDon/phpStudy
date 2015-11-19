@@ -54,7 +54,7 @@
 			// }
 			//echo $singleUrl."<br>";
 
-			$singleContents = file_get_contents($singleUrl);
+			$singleContents = @file_get_contents($singleUrl);
 
 			$regImg = '/<img src=\'(http:\/\/img.papayue.com\/UserImage\/\S+)\'/i';
 
@@ -62,33 +62,53 @@
 
 			$request[] = $accountResult;
 		 }
-		//var_dump($request);
+		
  	?>
 	<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			
-			$("#download").bind("click", function(){
+			$("#download").bind('click', function(event) {
+				<?php 
+					$i = 50;
+					$sum = 0;
+					foreach ($request as $key => $value) {
+						foreach ($value as $k => $v) {
+							$sum++;
+							//"setTimeout(function (){ requestUrl(' " + url + "', 1); }," . $i . "); \n";
+							echo "setTimeout(function (){ requestUrl('" . $v[1] . "'); }," . $i . "); \n";
+							$i = $i + 50;
+						}
+					}
+				 ?>
+			});
+			//总共有多少张图
+			var sum = <?php echo $sum ?>;
+			var progress = 0;
+			function requestUrl(url){
+				//console.log('http://localhost/phpcatch/post.php?url=' + url);
 				$.ajax({
-					url: 'http://localhost/phpcatch/post.php',
-					type: 'POST',
+					url: 'http://localhost/phpcatch/post.php?url=' + url,
+					type: 'GET',
 					dataType: 'json',
 				})
 				.done(function() {
-					console.log("success");
+					//console.log(data);
 				})
 				.fail(function() {
 					console.log("error");
 				})
 				.always(function(data) {
 					console.log(data);
-					var num = new Number(data.hasloaded/35);
-					var width = num.toFixed(2) * 100;
-					$("#progress").css('width', width + "%");
-					$("#progress span").text(width + "%");
-					console.log(num.toFixed(2));
-				});				
-			})
+					if(data.success){
+						progress++;
+						var proProgress = (progress/sum).toFixed(3);
+						var width = Math.round(proProgress * 100);
+						console.log("这是进度" + width + "%，这是之前的小数点" +  proProgress);
+						$("#progress").css("width", width + "%");
+						$("#progress span").text(width + "%");
+					}
+				});			
+			}
 		})
 	</script>
 	<style type="text/css">
@@ -98,7 +118,7 @@
 </head>
 <body>
 	<!-- 35条记录 -->
-	<?php echo $request; ?>
+	
 	<div id="viewScreen">
 		<div id="progress">
 			<span style="width:350px; text-align: center; display: block; ">0%</span>
